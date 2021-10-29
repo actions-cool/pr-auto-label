@@ -21,7 +21,7 @@ function getChangelog(content) {
       break;
     }
     if (begin && line) {
-      changeLog.push(line);
+      changeLog.push(line + '\n');
     }
     if (!begin) {
       begin = pin.test(line);
@@ -49,6 +49,7 @@ async function run() {
   await open(url);
 
   console.log(chalk.yellow('🚀 Please check tag and changelog. Then click publish!'));
+  console.log(chalk.green('🎉 Release Done!'));
 };
 
 run();

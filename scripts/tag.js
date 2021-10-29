@@ -42,7 +42,7 @@ async function run() {
 
   console.log(chalk.yellow(`[Git Action] Add new simple ${tagSimple} tag`));
   execSync(`git push origin ${tag}:${tagSimple}`);
-  console.log(chalk.green('🎉 Done!'));
+  console.log(chalk.green('🎉 Tag Done!'));
 }
 
 function getChangelogTag(content) {
