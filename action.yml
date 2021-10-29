@@ -1,6 +1,6 @@
 # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
 name: 'PR Auto Label'
-description: 'PR auto set label follow it's title and status.'
+description: 'PR auto set label follow it's title.'
 author: 'xrkffgg'
 
 # https://actions-cool.github.io/github-action-branding/
