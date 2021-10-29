@@ -1,18 +1,24 @@
 # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
-name: 'Action TS Template'
-description: 'A typescript template for rapid development of GitHub actions.'
+name: 'PR Auto Label'
+description: 'PR auto set label follow it's title and status.'
 author: 'xrkffgg'
 
+# https://actions-cool.github.io/github-action-branding/
 branding:
-  # https://actions-cool.github.io/github-action-branding/
-  icon: 'file'
-  color: 'blue'
+  icon: 'skip-back'
+  color: 'purple'
 
 inputs:
   token:
     description: Secret GitHub API token to use for making API requests.
     default: ${{ github.token }}
     required: true
+  enum:
+    description: list that need to deal
+  format:
+    description: label format
+  extra:
+    description: extra deal
 
 #outputs:
 #  result:

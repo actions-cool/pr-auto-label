@@ -1,37 +1,45 @@
 {
-  "name": "action-ts-template",
+  "name": "pr-auto-label",
   "private": true,
-  "description": "A typescript template for rapid development of GitHub actions.",
+  "description": "PR auto set label follow its title.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/actions-cool/action-ts-template",
+    "url": "https://github.com/actions-cool/pr-auto-label",
     "branch": "main"
   },
   "license": "MIT",
   "author": "xrkffgg",
   "main": "src/main.ts",
   "scripts": {
-    "build": "tsc",
-    "format": "prettier --write **/*.ts",
-    "format-check": "prettier --check **/*.ts",
-    "lint": "eslint src/**/*.ts",
-    "lint-fix": "eslint src/**/*.ts --fix",
-    "package": "ncc build src/main.ts -o dist",
+    "check-commit": "node ./scripts/check-commit.js",
+    "package": "ncc build",
+    "format": "prettier --write src/*.ts",
+    "format-check": "prettier --check src/*.ts",
+    "lint": "eslint src/*.ts",
+    "lint-fix": "eslint src/*.ts --fix",
+    "tag": "node ./scripts/tag.js",
+    "release": "node ./scripts/release",
+    "pub": "sh -e ./scripts/pub.sh",
     "all": "npm run format-check && npm run lint && npm run package"
   },
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
-    "@octokit/rest": "^18.0.14"
+    "@octokit/rest": "^18.0.14",
+    "actions-util": "^1.0.0"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^4.15.2",
     "@umijs/fabric": "^2.5.6",
     "@vercel/ncc": "^0.27.0",
+    "chalk": "^4.1.2",
     "eslint": "^7.18.0",
     "eslint-plugin-github": "^4.1.1",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "new-github-release-url": "^1.0.0",
+    "open": "^7.3.0",
     "prettier": "^2.2.1",
+    "simple-git": "^2.46.0",
     "typescript": "^4.1.3"
   }
 }

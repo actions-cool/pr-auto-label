@@ -1,58 +1,57 @@
-<p align="center">
-  <a href="">
-    <img width="140" src="https://avatars.githubusercontent.com/u/73879334?s=200&v=4" />
-  </a>
-</p>
+# PR Auto Label
 
-<h1 align="center">Action TypeScript Template</h1>
-<div align="center">
-A typescript template for rapid development of GitHub actions.
-</div>
+![](https://img.shields.io/github/workflow/status/actions-cool/pr-auto-label/CI?style=flat-square)
+[![](https://img.shields.io/badge/marketplace-pr--auto--label-blueviolet?style=flat-square)](https://github.com/marketplace/actions/pr-auto-label)
+[![](https://img.shields.io/github/v/release/actions-cool/pr-auto-label?style=flat-square&color=orange)](https://github.com/actions-cool/pr-auto-label/releases)
 
-![](https://img.shields.io/github/workflow/status/actions-cool/action-ts-template/CI?style=flat-square)
-[![](https://img.shields.io/badge/marketplace-action--ts--template-blueviolet?style=flat-square)](https://github.com/marketplace/actions/action-ts-template)
-[![](https://img.shields.io/github/v/release/actions-cool/action-ts-template?style=flat-square&color=orange)](https://github.com/actions-cool/action-ts-template/releases)
+PR auto set label follow its title.
 
 ## 🚀 How to use?
 
-![](https://github.com/actions-cool/resources/blob/main/image/template.png?raw=true)
+```yml
+name: PR Auto Label
 
-## 📒 Catalog Introduction
+on:
+  pull_request_target:
+    types: [opened, edited]
 
+jobs:
+  set-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pr-auto-label
+        uses: actions-cool/pr-auto-label@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          enum: 'fix, feat, docs'
+          format: 'pr-${type}'
+          extra: 'feat/feature, docs/doc'
 ```
-├── .github/workflows/     The CI for make sure it is packaged correctly
-├── dist                   Package the generated Aciton execution code
-├── src                    Component home directory
-│   └── main.ts            Your code
-├── .eslintrc.js           Eslint config
-├── .prettierrc.js         Prettier config
-├── action.yml             Action config
-└── tsconfig.json          TypeScript config
-```
 
-The rest of the documents can be consulted by yourself.
+### Inputs
 
-## 🤖 Command introduction
-
-| Name | Desc |
-| -- | -- |
-| build | ts build |
-| format | prettier write |
-| lint | eslint check |
-| package | action build for release |
-| all | npm all |
+| Name | Desc | Type | Required |
+| -- | -- | -- | -- |
+| token | GitHub token | string | ✖ |
+| enum | Only deal with these types, when no input will deal all | string | ✖ |
+| format | PR label format. Default `pr(${type})` | string | ✖ |
+| extra | Extra replacement | string | ✖ |
 
 ## ⚡ Feedback
 
 You are very welcome to try it out and put forward your comments. You can use the following methods:
 
-- Report bugs or consult with [Issue](https://github.com/actions-cool/action-ts-template/issues)
-- Submit [Pull Request](https://github.com/actions-cool/action-ts-template/pulls) to improve the code of `action-ts-template`
+- Report bugs or consult with [Issue](https://github.com/actions-cool/pr-auto-label/issues)
+- Submit [Pull Request](https://github.com/actions-cool/pr-auto-label/pulls) to improve the code of `pr-auto-label`
 
 也欢迎加入 钉钉交流群
 
 ![](https://github.com/actions-cool/resources/blob/main/dingding.jpeg?raw=true)
 
+## Changelog
+
+[CHANGELOG](./CHANGELOG.md)
+
 ## LICENSE
 
-[MIT](https://github.com/actions-cool/action-ts-template/blob/main/LICENSE)
+[MIT](./LICENSE)
