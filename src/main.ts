@@ -30,12 +30,14 @@ async function run(): Promise<void> {
       titleType = titleType.split('(')[0];
     }
 
+    let ifAddNew = true;
+
     if (titleType) {
       if (enumInput) {
         const enumArr = dealStringToArr(enumInput);
         if (enumArr.indexOf(titleType) === -1) {
           core.warning(`[AC] This PR type: ${titleType} is not in list to deal.`);
-          return;
+          ifAddNew = false;
         }
       }
 
@@ -71,13 +73,15 @@ async function run(): Promise<void> {
           }
         }
 
-        await octokit.issues.addLabels({
-          owner,
-          repo,
-          issue_number: number,
-          labels: dealStringToArr(needLabel),
-        });
-        core.info(`[AC] 🎉 This PR add ${needLabel} success.`);
+        if (ifAddNew) {
+          await octokit.issues.addLabels({
+            owner,
+            repo,
+            issue_number: number,
+            labels: dealStringToArr(needLabel),
+          });
+          core.info(`[AC] 🎉 This PR add ${needLabel} success.`);
+        }
       }
     } else {
       core.setFailed(`[AC] This PR title is not has a type!`);

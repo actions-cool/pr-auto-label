@@ -9756,12 +9756,13 @@ function run() {
             if (titleType.split('(').length > 0) {
                 titleType = titleType.split('(')[0];
             }
+            let ifAddNew = true;
             if (titleType) {
                 if (enumInput) {
                     const enumArr = (0, actions_util_1.dealStringToArr)(enumInput);
                     if (enumArr.indexOf(titleType) === -1) {
                         core.warning(`[AC] This PR type: ${titleType} is not in list to deal.`);
-                        return;
+                        ifAddNew = false;
                     }
                 }
                 const prLabels = labels.map(({ name }) => name);
@@ -9793,13 +9794,15 @@ function run() {
                             core.info(`[AC] 🔔 This PR remove ${label} success.`);
                         }
                     }
-                    yield octokit.issues.addLabels({
-                        owner,
-                        repo,
-                        issue_number: number,
-                        labels: (0, actions_util_1.dealStringToArr)(needLabel),
-                    });
-                    core.info(`[AC] 🎉 This PR add ${needLabel} success.`);
+                    if (ifAddNew) {
+                        yield octokit.issues.addLabels({
+                            owner,
+                            repo,
+                            issue_number: number,
+                            labels: (0, actions_util_1.dealStringToArr)(needLabel),
+                        });
+                        core.info(`[AC] 🎉 This PR add ${needLabel} success.`);
+                    }
                 }
             }
             else {

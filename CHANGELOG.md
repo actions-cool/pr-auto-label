@@ -8,6 +8,12 @@
 
 # Changelog
 
+## v1.0.2
+
+`2021.10.29`
+
+- 🐞 fix: remove failed when no in enum.
+
 ## v1.0.1
 
 `2021.10.29`
