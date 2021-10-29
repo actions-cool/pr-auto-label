@@ -36,7 +36,7 @@ async function run(): Promise<void> {
       }
 
       const prLabels: string[] = labels.map(({ name }: any) => name);
-      const needLabel = format.replace('${type}', titleType);
+      let needLabel = format.replace('${type}', titleType);
 
       if (extra) {
         const extraObj = {} as any;
@@ -45,7 +45,7 @@ async function run(): Promise<void> {
           extraObj[key] = val;
         });
         if (extraObj[titleType]) {
-          needLabel.replace(titleType, extraObj[titleType]);
+          needLabel = needLabel.replace(titleType, extraObj[titleType]);
         }
       }
 

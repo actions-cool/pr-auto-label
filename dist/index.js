@@ -9762,7 +9762,7 @@ function run() {
                     }
                 }
                 const prLabels = labels.map(({ name }) => name);
-                const needLabel = format.replace('${type}', titleType);
+                let needLabel = format.replace('${type}', titleType);
                 if (extra) {
                     const extraObj = {};
                     (0, actions_util_1.dealStringToArr)(extra).forEach(ex => {
@@ -9770,7 +9770,7 @@ function run() {
                         extraObj[key] = val;
                     });
                     if (extraObj[titleType]) {
-                        needLabel.replace(titleType, extraObj[titleType]);
+                        needLabel = needLabel.replace(titleType, extraObj[titleType]);
                     }
                 }
                 if (prLabels.indexOf(needLabel) > -1) {
