@@ -9752,7 +9752,10 @@ function run() {
             }
             const { owner, repo } = ctx.repo;
             const { title, number, labels } = ctx.payload.pull_request;
-            const titleType = title.split(':')[0];
+            let titleType = title.split(':')[0];
+            if (titleType.split('(').length > 0) {
+                titleType = titleType.split('(')[0];
+            }
             if (titleType) {
                 if (enumInput) {
                     const enumArr = (0, actions_util_1.dealStringToArr)(enumInput);

@@ -25,7 +25,11 @@ async function run(): Promise<void> {
       labels: object[];
     };
 
-    const titleType = title.split(':')[0];
+    let titleType = title.split(':')[0];
+    if (titleType.split('(').length > 0) {
+      titleType = titleType.split('(')[0];
+    }
+
     if (titleType) {
       if (enumInput) {
         const enumArr = dealStringToArr(enumInput);
