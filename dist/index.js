@@ -9747,11 +9747,12 @@ function run() {
             const extra = core.getInput('extra');
             const ctx = github.context;
             if (ctx.eventName.indexOf('pull_request') === -1) {
-                core.warning(`[AC] This Action is only support PR events.`);
+                core.warning(`[AC] 🛑 This Action is only support PR events.`);
                 return;
             }
             const { owner, repo } = ctx.repo;
             const { title, number, labels } = ctx.payload.pull_request;
+            core.info(`[AC] 🛎 This PR number is [${number}].`);
             let titleType = title.split(':')[0];
             if (titleType.split('(').length > 0) {
                 titleType = titleType.split('(')[0];
@@ -9761,7 +9762,7 @@ function run() {
                 if (enumInput) {
                     const enumArr = (0, actions_util_1.dealStringToArr)(enumInput);
                     if (enumArr.indexOf(titleType) === -1) {
-                        core.warning(`[AC] This PR type: ${titleType} is not in list to deal.`);
+                        core.warning(`[AC] 🛡 This PR type: ${titleType} is not in list to deal.`);
                         ifAddNew = false;
                     }
                 }
@@ -9806,7 +9807,7 @@ function run() {
                 }
             }
             else {
-                core.setFailed(`[AC] This PR title is not has a type!`);
+                core.setFailed(`[AC] 🛑 This PR title is not has a type!`);
             }
             core.info(actions_util_1.THANKS);
         }

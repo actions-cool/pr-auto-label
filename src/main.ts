@@ -14,7 +14,7 @@ async function run(): Promise<void> {
 
     const ctx = github.context;
     if (ctx.eventName.indexOf('pull_request') === -1) {
-      core.warning(`[AC] This Action is only support PR events.`);
+      core.warning(`[AC] 🛑 This Action is only support PR events.`);
       return;
     }
 
@@ -24,6 +24,8 @@ async function run(): Promise<void> {
       number: number;
       labels: object[];
     };
+
+    core.info(`[AC] 🛎 This PR number is [${number}].`);
 
     let titleType = title.split(':')[0];
     if (titleType.split('(').length > 0) {
@@ -36,7 +38,7 @@ async function run(): Promise<void> {
       if (enumInput) {
         const enumArr = dealStringToArr(enumInput);
         if (enumArr.indexOf(titleType) === -1) {
-          core.warning(`[AC] This PR type: ${titleType} is not in list to deal.`);
+          core.warning(`[AC] 🛡 This PR type: ${titleType} is not in list to deal.`);
           ifAddNew = false;
         }
       }
@@ -84,7 +86,7 @@ async function run(): Promise<void> {
         }
       }
     } else {
-      core.setFailed(`[AC] This PR title is not has a type!`);
+      core.setFailed(`[AC] 🛑 This PR title is not has a type!`);
     }
     core.info(THANKS);
   } catch (error: any) {
