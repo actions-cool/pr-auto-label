@@ -52,6 +52,21 @@ async function run(): Promise<void> {
       if (prLabels.indexOf(needLabel) > -1) {
         core.info(`[AC] 🎁 This PR already has ${needLabel}.`);
       } else {
+        const [b, e] = format.split('${type}');
+        const removeLabels = prLabels.filter(name => name.startsWith(b) && name.endsWith(e));
+
+        if (removeLabels.length) {
+          for (const label of removeLabels) {
+            await octokit.issues.removeLabel({
+              owner,
+              repo,
+              issue_number: number,
+              name: label,
+            });
+            core.info(`[AC] 🔔 This PR remove ${label} success.`);
+          }
+        }
+
         await octokit.issues.addLabels({
           owner,
           repo,

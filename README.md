@@ -37,6 +37,9 @@ jobs:
 | format | PR label format. Default `pr(${type})` | string | ✖ |
 | extra | Extra replacement | string | ✖ |
 
+- `${type}` will replace the real PR title type.
+- `pr-${type}-${type}` is not support.
+
 ## ⚡ Feedback
 
 You are very welcome to try it out and put forward your comments. You can use the following methods:
